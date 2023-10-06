@@ -12,13 +12,13 @@ Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curs
   - Banco Mundial. Gender Data Portal
   - Link: https://genderdata.worldbank.org/indicators/sg-gen-parl-zs/?year=2019
   - Nombre en la base de datos: Proportion of seats held by women in national parliaments (%) 
-3. Violencia contra la mujer :
+2. Violencia contra la mujer :
   - OECD Data Inequality - Violence Agains Women
   - Link: https://data.oecd.org/inequality/violence-against-women.htm#indicator-chart
   - Nombre en la base de datos: Value
-4. Restricción de libertades civiles:
+3. Restricción de libertades civiles:
   - OECD.Stat Social Institutions and Gender Index
-  - $$Link: https://stats.oecd.org/Index.aspx?DataSetCode=SIGI2019$$
+  - Link: https://stats.oecd.org/Index.aspx?DataSetCode=SIGI2019
   - Nombre en la base de datos: Rectricted civil liberties 
 
 ### Variable de Control: Densidad Poblacional
