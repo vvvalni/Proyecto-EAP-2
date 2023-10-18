@@ -136,6 +136,10 @@ libertades = filter(libertades, Region =="All regions")
 ```
 
 ```{r}
+libertades = filter(libertades, Income == "All income groups")
+```
+
+```{r}
 libertades = libertades[,c(3,11)]
 ```
 
@@ -146,6 +150,9 @@ colnames(libertades)[2] = "restricción 2019"
 colnames(libertades)
 ```
 
-```{r}
+### Merge Final
 
+```{r}
+PBIgen = merge(data3, libertades)
+str(PBIgen)
 ```
