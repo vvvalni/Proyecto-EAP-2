@@ -58,7 +58,7 @@ colnames(population)[2] = "PT 2022"
 colnames(population)
 ```
 
-###  Merge 1:
+### Merge 1:
 
 ```{r}
 data1=merge(pbi,population)
@@ -109,7 +109,7 @@ colnames(escaños)[2] = "escaños 2019"
 colnames(escaños)
 ```
 
-### Merge 3: 
+### Merge 3:
 
 ```{r}
 data3 = merge(data2,escaños)
@@ -156,3 +156,69 @@ colnames(libertades)
 PBIgen = merge(data3, libertades)
 str(PBIgen)
 ```
+
+```{r}
+colnames(PBIgen)[4] = "PT2022"
+colnames(PBIgen)[5] = "violencia"
+colnames(PBIgen)[6] = "escaños2019"
+colnames(PBIgen)[7] = "restricción2019"
+```
+
+# Regresión Gaussiana
+
+## Modelo 1:
+
+```{r}
+modelo1=formula(pc2022~violencia)
+
+reg1=lm(modelo1,data=PBIgen)
+summary(reg1)
+```
+
+## Modelo 2:
+
+```{r}
+modelo2=formula(pc2022~violencia + escaños2019)
+
+reg2=lm(modelo2,data=PBIgen)
+summary(reg2)
+```
+
+## Modelo 3:
+
+```{r}
+modelo3=formula(pc2022~violencia + escaños2019 + restricción2019)
+
+reg3=lm(modelo3,data=PBIgen)
+summary(reg3)
+```
+
+## Modelo 4:
+
+```{r}
+modelo4=formula(pc2022~violencia + escaños2019 + restricción2019 + PT2022)
+
+reg4=lm(modelo4,data=PBIgen)
+summary(reg4)
+```
+
+## Gráficos:
+
+Histograma
+
+Matriz de correlaciones
+
+```{r}
+
+```
+
+## Mapas:
+
+```{r}
+library(sf)
+mapDEP=sf::read_sf("World_Countries_Generalized.shp")
+```
+```{r}
+head(mapDEP)
+```
+export(PBIgen, "data_final.xlsx")

@@ -1,0 +1,4 @@
+"0","library(sf)"
+"2","Linking to GEOS 3.11.2, GDAL 3.6.2, PROJ 9.2.0; sf_use_s2() is TRUE
+"
+"0","mapDEP=sf::read_sf(""World_Countries_Generalized.shp"")"
