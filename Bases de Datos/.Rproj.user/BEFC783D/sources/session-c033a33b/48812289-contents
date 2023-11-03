@@ -187,9 +187,33 @@ colnames(código)[2] = "Código"
 colnames(código)
 ```
 
-### Merge Final
+### Merge 5:
 
 ```{r}
 PBIgen = merge(PBIgen, código)
+str(PBIgen)
+```
+
+## Data Regiones 
+
+```{r}
+link7 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Regiones.csv"
+regiones = import(link7)
+```
+
+```{r}
+regiones = regiones[,c(3,13)]
+```
+
+```{r}
+colnames(regiones)[1] = "Código"
+colnames(regiones)[2] = "Region"
+colnames(regiones) 
+```
+
+### Merge Final:
+
+```{r}
+PBIgen = merge(PBIgen, regiones)
 str(PBIgen)
 ```

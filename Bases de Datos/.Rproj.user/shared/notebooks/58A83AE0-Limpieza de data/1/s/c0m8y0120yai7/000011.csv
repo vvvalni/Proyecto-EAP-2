@@ -1,0 +1,2 @@
+"0","link7 = ""https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Regiones.csv"""
+"0","regiones = import(link7)"
