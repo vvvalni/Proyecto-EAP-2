@@ -1,1 +1,2 @@
-"0","violence = import(""Violencia contra la mujer.csv"")"
+"0","link3 = ""https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Violencia%20contra%20la%20mujer.csv"""
+"0","violence = import(link3)"

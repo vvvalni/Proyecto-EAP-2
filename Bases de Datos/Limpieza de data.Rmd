@@ -11,7 +11,8 @@ output: html_document
 
 ```{r}
 library(rio)
-pbi = import("PBI.csv")
+link1 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/PBI.csv"
+pbi = import(link1)
 ```
 
 ```{r}
@@ -43,7 +44,8 @@ pbi=pbi[complete.cases(pbi),]
 ## Data 2: Population
 
 ```{r}
-population = import("Population (number).csv")
+link2 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Population%20(number).csv"
+population = import(link2)
 str(population)
 ```
 
@@ -68,7 +70,8 @@ str(data1)
 ## Data 3: Violencia
 
 ```{r}
-violence = import("Violencia contra la mujer.csv")
+link3 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Violencia%20contra%20la%20mujer.csv"
+violence = import(link3)
 ```
 
 ```{r}
@@ -91,7 +94,8 @@ str(data2)
 ## Data 4: Escaños
 
 ```{r}
-escaños = import ("Proportion of seats held by women in national parliaments (%).csv")
+link4 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Proportion%20of%20seats%20held%20by%20women%20in%20national%20parliaments%20(%25).csv"
+escaños = import (link4)
 ```
 
 ```{r}
@@ -119,7 +123,8 @@ str(data3)
 ## Data 5: Libertades
 
 ```{r}
-libertades = import("Libertades civiles de mujeres.csv")
+link5 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Libertades%20civiles%20de%20mujeres.csv"
+libertades = import(link5)
 str(libertades)
 ```
 
@@ -167,7 +172,8 @@ colnames(PBIgen)[7] = "restricción2019"
 ## Data Códigos de países
 
 ```{r}
-código = import("all.csv")
+link6 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/all.csv"
+código = import(link6)
 ```
 
 ```{r}

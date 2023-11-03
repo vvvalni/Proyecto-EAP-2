@@ -172,7 +172,8 @@ colnames(PBIgen)[7] = "restricción2019"
 ## Data Códigos de países
 
 ```{r}
-código = import("all.csv")
+link6 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/all.csv"
+código = import(link6)
 ```
 
 ```{r}
