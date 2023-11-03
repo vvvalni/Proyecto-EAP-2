@@ -116,6 +116,7 @@ g2 = ggplot(dff, aes(x=reorder(pais,pc2022), y=pc2022, fill = type)) +
 g2
 ```
 
+#diagrama de dispersión (distintas rectas)
 
 Matriz de correlaciones
 

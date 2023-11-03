@@ -48,7 +48,7 @@ mapaley3= mapaleyenda3 + geom_sf(data=mapMUN2,
       
 mapa3= mapaley3 +
 coord_sf() + 
-scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=100, by=10)) + theme_void() + 
+scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=160000, by=20000)) + theme_void() + 
   
 theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
   
@@ -62,14 +62,14 @@ mapa3
 
 ## Column {data-width=400} {.tabset}
 
-### Tabla de resultados (Ranking de violencia por País)
+### Ranking del PBI per cápita por país
 
 ```{r include=FALSE}
-
+PBIPC = PBIgen[,c(2,3)]
 ```
 
 ```{r echo=FALSE}
-
+datatable(PBIPC, filter = "top")
 ```
 
 ### Histograma
@@ -107,14 +107,14 @@ mapa1
 
 ## Column {data-width=400} {.tabset}
 
-### Tabla de resultados (Ranking de violencia por País)
+### Ranking de violencia por País
 
 ```{r include=FALSE}
-
+violencia = PBIgen[,c(2,5)]
 ```
 
-```{r echo=FALSE}
-
+```{r}
+datatable(violencia, filter = "top")
 ```
 
 ### Histograma
@@ -152,11 +152,16 @@ mapa2
 
 ## Column {data-width=400} {.tabset}
 
-### Tabla de resultados (Ranking de libertades concedidas por País)
+### Ranking de Países según libertades restringidas
 
 ```{r include=FALSE}
-
+Restricciones = PBIgen[,c(2,7)]
 ```
+
+```{r}
+datatable(Restricciones, filter = "top")
+```
+
 
 ### Histograma
 

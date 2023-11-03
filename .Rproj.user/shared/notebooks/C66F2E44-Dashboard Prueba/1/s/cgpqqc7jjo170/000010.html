@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="lib/kePrint-0.0.1/kePrint.js"></script>
+<link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+</head>
+<body>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
+<caption>Resultados de todos los modelos</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Índice de violencia </th>
+   <th style="text-align:center;"> Cantidad de escaños </th>
+   <th style="text-align:center;"> Restricción de libertades </th>
+   <th style="text-align:center;"> Población - Control </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 43867.530*** </td>
+   <td style="text-align:center;"> 36964.393*** </td>
+   <td style="text-align:center;"> 51829.021*** </td>
+   <td style="text-align:center;"> 52389.922*** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (3317.317) </td>
+   <td style="text-align:center;"> (6551.831) </td>
+   <td style="text-align:center;"> (8783.020) </td>
+   <td style="text-align:center;"> (8924.503) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> violencia </td>
+   <td style="text-align:center;"> -727.779*** </td>
+   <td style="text-align:center;"> -699.469*** </td>
+   <td style="text-align:center;"> -630.515*** </td>
+   <td style="text-align:center;"> -627.020*** </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (107.471) </td>
+   <td style="text-align:center;"> (111.691) </td>
+   <td style="text-align:center;"> (112.903) </td>
+   <td style="text-align:center;"> (113.631) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> escaños2019 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 241.410 </td>
+   <td style="text-align:center;"> 5.680 </td>
+   <td style="text-align:center;"> -3.980 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (193.394) </td>
+   <td style="text-align:center;"> (211.984) </td>
+   <td style="text-align:center;"> (214.087) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> restricción2019 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -379.226* </td>
+   <td style="text-align:center;"> -383.363* </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (152.943) </td>
+   <td style="text-align:center;"> (153.821) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> PT2022 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (0.000) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 128 </td>
+   <td style="text-align:center;"> 126 </td>
+   <td style="text-align:center;"> 126 </td>
+   <td style="text-align:center;"> 126 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.267 </td>
+   <td style="text-align:center;"> 0.293 </td>
+   <td style="text-align:center;"> 0.327 </td>
+   <td style="text-align:center;"> 0.328 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.261 </td>
+   <td style="text-align:center;"> 0.281 </td>
+   <td style="text-align:center;"> 0.310 </td>
+   <td style="text-align:center;"> 0.306 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 2949.9 </td>
+   <td style="text-align:center;"> 2900.5 </td>
+   <td style="text-align:center;"> 2896.3 </td>
+   <td style="text-align:center;"> 2898.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;"> 2958.4 </td>
+   <td style="text-align:center;"> 2911.8 </td>
+   <td style="text-align:center;"> 2910.5 </td>
+   <td style="text-align:center;"> 2915.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -1471.945 </td>
+   <td style="text-align:center;"> -1446.247 </td>
+   <td style="text-align:center;"> -1443.150 </td>
+   <td style="text-align:center;"> -1443.067 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 45.858 </td>
+   <td style="text-align:center;"> 25.480 </td>
+   <td style="text-align:center;"> 19.747 </td>
+   <td style="text-align:center;"> 14.748 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> RMSE </td>
+   <td style="text-align:center;"> 23876.14 </td>
+   <td style="text-align:center;"> 23370.11 </td>
+   <td style="text-align:center;"> 22802.62 </td>
+   <td style="text-align:center;"> 22787.59 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+</table> <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]}})</script><script async src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
