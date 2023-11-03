@@ -186,14 +186,10 @@ colnames(código)[2] = "Código"
 
 colnames(código)
 ```
+
 ### Merge Final
 
 ```{r}
 PBIgen = merge(PBIgen, código)
 str(PBIgen)
 ```
-
-```{r}
-link7 = ""
-```
-

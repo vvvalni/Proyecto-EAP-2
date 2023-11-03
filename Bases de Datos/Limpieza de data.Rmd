@@ -193,3 +193,10 @@ PBIgen = merge(PBIgen, código)
 str(PBIgen)
 ```
 
+
+
+```{r}
+link7 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Women%20parliamentarians.csv"
+parlamento = import(link7)
+```
+
