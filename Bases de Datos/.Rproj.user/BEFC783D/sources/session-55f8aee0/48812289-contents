@@ -193,3 +193,7 @@ PBIgen = merge(PBIgen, código)
 str(PBIgen)
 ```
 
+```{r}
+
+```
+
