@@ -1,0 +1,158 @@
+---
+title: "Dashboard Prueba"
+author: "Valeria Yesquen"
+subtitle: 'Curso: POL304 - Estadística para el análisis político 2'
+output: 
+  flexdashboard::flex_dashboard:
+    navbar:
+      - { title: "About", href: "https://github.com/vvvalni/Proyecto-EAP-2" }
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r include=FALSE}
+library(rio)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+library(modelsummary)
+```
+
+```{r include=FALSE}
+data = import("Bases de Datos/data_final.xlsx")
+mapMUN=sf::read_sf("shapes/World_Countries_Generalized.shp") #shapefile
+```
+
+```{r}
+#Juntamos información con el shape:
+mapMUN2=merge(mapMUN,data,by = "ISO", all.x = T) 
+```
+
+
+# Violencia de Género
+
+Column {data-width=400} 
+-----------------------------------------------------------------------
+
+### Mapa del grado de violencia por país
+
+```{r}
+mapaleyendaL= ggplot(mapMUN2)+ geom_sf() + theme_light()
+
+mapaleyL= mapaleyendaL + geom_sf(data=mapMUN2,
+              aes(fill=`violencia`),color = "lightgray")
+      
+mapa1= mapaleyL +
+coord_sf() + 
+scale_fill_gradient(low = "seashell",  high = "orange", breaks=seq(from=0, to=100, by=10)) + theme_void() + 
+  
+theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
+  
+labs(title = "Índice de violencia de género por país") +
+  
+theme(
+plot.title = element_text(color="black", size=10, face="bold"))
+
+mapa1
+```
+
+
+Column {data-width=600} {.tabset}
+-----------------------------------------------------------------------
+
+### Tabla de resultados (Ranking de violencia por País)
+
+```{r include=FALSE}
+
+```
+
+```{r echo=FALSE}
+
+```
+
+### Histograma
+
+```{r echo=FALSE}
+
+```
+
+
+# Libertades civiles de las mujeres
+
+Column {data-width=400} 
+-----------------------------------------------------------------------
+
+### Mapa de libertades concedidas por país
+
+```{r}
+
+```
+
+
+Column {data-width=600} {.tabset}
+-----------------------------------------------------------------------
+
+### Tabla de resultados (Ranking de libertades concedidas por País)
+
+```{r include=FALSE}
+
+```
+
+
+### Histograma
+
+```{r echo=FALSE}
+
+```
+
+
+# Modelos estadísticos
+
+Column {data-width=400} {.tabset}
+-----------------------------------------------------------------------
+
+### Modelo 1
+
+```{r}
+
+```
+
+### Modelo 2
+
+```{r}
+
+```
+
+### Modelo 3
+
+```{r}
+
+```
+
+Column {data-width=600} {.tabset}
+-----------------------------------------------------------------------
+
+### Gráfico - Modelo 1
+
+```{r include=FALSE}
+
+```
+
+```{r echo=FALSE}
+
+```
+
+### Grafico - Modelo 2
+
+```{r echo=FALSE}
+
+```
+
+### Grafico - Modelo 3
+
+
+
