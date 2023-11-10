@@ -217,3 +217,7 @@ colnames(regiones)
 PBIgen = merge(PBIgen, regiones)
 str(PBIgen)
 ```
+
+```{r}
+PBIgen=PBIgen[complete.cases(PBIgen$escaños2019),]
+```
