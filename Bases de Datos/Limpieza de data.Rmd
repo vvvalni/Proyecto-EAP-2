@@ -194,7 +194,7 @@ PBIgen = merge(PBIgen, código)
 str(PBIgen)
 ```
 
-## Data Regiones 
+## Data Regiones
 
 ```{r}
 link7 = "https://raw.githubusercontent.com/vvvalni/Proyecto-EAP-2/main/Bases%20de%20Datos/Regiones.csv"
