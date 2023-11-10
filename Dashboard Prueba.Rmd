@@ -26,6 +26,7 @@ library(Rmisc)
 library(forcats)
 library(factoextra)
 library(cluster)
+library(ggrepel)
 ```
 
 ```{r include=FALSE}
@@ -380,17 +381,12 @@ dataClus=PBIgen[,c(3,5:7)]
 row.names(dataClus)=PBIgen$País
 ```
 
-```{r}
-dataClus=dataClus[complete.cases(dataClus),]
-```
-
 
 ```{r}
 g.dist = daisy(dataClus, metric="gower")
 ```
 
 ## Column {data-width="600"} {.tabset}
-
 
 ### Construcción del Cluster
 
@@ -420,32 +416,11 @@ silPAM$País=row.names(silPAM)
 poorPAM=silPAM[silPAM$sil_width<0,'País']%>%sort()
 poorPAM
 ```
-```{r}
-aggregate(.~ pam, data=dataClus,mean)
-```
-
-```{r}
-
-```
-
 
 ### Visualización
 
 ```{r}
-# solo paises mal clusterizados
-PAMlabels=ifelse(dataClus$pamIDHpoor,idhdemo$country,'')
 
-#base
-base= ggplot(idhdemo,aes(x=dim1, y=dim2))  +
-    scale_color_brewer(type = 'qual',palette ='Dark2'  ) + labs(subtitle = "Se destacan los países mal clusterizados")
-
-pamPlot=base + geom_point(size=3, 
-                          aes(color=pamIDH))  + 
-        labs(title = "PAM") 
-# hacer notorios los paises mal clusterizados
-pamPlot + geom_text_repel(size=4,
-                          aes(label=PAMlabels),
-                          max.overlaps = 50,
-                          min.segment.length = unit(0, 'lines'))
 ```
+
 

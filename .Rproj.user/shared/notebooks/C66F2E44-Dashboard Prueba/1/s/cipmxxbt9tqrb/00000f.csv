@@ -1,2 +1,0 @@
-"0","#Juntamos información con el shape:"
-"0","mapMUN2=merge(mapMUN,PBIgen,by = ""ISO"", all.x = T) "

@@ -1,4 +1,0 @@
-"0","link = ""https://github.com/vvvalni/Proyecto-EAP-2/raw/main/Bases%20de%20Datos/data_final.xlsx"""
-"0","PBIgen = import(link)"
-"0",""
-"0","mapMUN=sf::read_sf(""shapes/World_Countries_Generalized.shp"") #shapefile"
