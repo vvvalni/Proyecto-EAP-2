@@ -418,4 +418,3 @@ head(dataClus,15)%>%kbl()%>%kable_styling()
 ```{r}
 fviz_silhouette(res.pam,print.summary = F)
 ```
-
