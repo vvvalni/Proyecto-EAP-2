@@ -375,39 +375,47 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 # Clusters
 
-## Column {data-width="333"} 
+```{r}
+dataClus=PBIgen[,c(3,5:7)]
+row.names(dataClus)=PBIgen$País
+```
 
-### Partición (PAM)
+```{r}
+dataClus=dataClus[complete.cases(dataClus),]
+```
+
+
+```{r}
+g.dist = daisy(dataClus, metric="gower")
+```
+
+## Column {data-width="600"} {.tabset}
+
+### Sugerencia de Clusters (PAM)
 
 ```{r}
 fviz_nbclust(dataClus, pam,diss=g.dist,method = "gap_stat",k.max = 10,verbose = F)
 ```
 
-```{r}
+### Construcción del Cluster
 
+```{r}
+set.seed(123)
+res.pam=pam(g.dist,3,cluster.only = F)
+
+#nueva columna
+dataClus$pam=res.pam$cluster
+
+# ver
+
+head(dataClus,15)%>%kbl()%>%kable_styling()
 ```
 
-## Column {data-width="333"}
+## Column {data-width="600"}
 
-### Jerarquización - Aglomerativa (AGNES)
-
-```{r}
-
-```
+### Silueta
 
 ```{r}
-
-```
-
-## Column {data-width="333"}
-
-### Jerarquización - Divisiva (DIANA)
-
-```{r}
-
-```
-
-```{r}
-
+fviz_silhouette(res.pam,print.summary = F)
 ```
 
