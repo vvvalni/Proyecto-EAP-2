@@ -24,6 +24,8 @@ library(kableExtra)
 library(modelsummary)
 library(Rmisc)
 library(forcats)
+library(factoextra)
+library(cluster)
 ```
 
 ```{r include=FALSE}
@@ -370,3 +372,42 @@ modelsummary(models, title = "Resultados de todos los modelos",
 ```
 
 ### Grafico - Modelo 3
+
+# Clusters
+
+## Column {data-width="333"} 
+
+### Partición (PAM)
+
+```{r}
+fviz_nbclust(dataClus, pam,diss=g.dist,method = "gap_stat",k.max = 10,verbose = F)
+```
+
+```{r}
+
+```
+
+## Column {data-width="333"}
+
+### Jerarquización - Aglomerativa (AGNES)
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+## Column {data-width="333"}
+
+### Jerarquización - Divisiva (DIANA)
+
+```{r}
+
+```
+
+```{r}
+
+```
+
