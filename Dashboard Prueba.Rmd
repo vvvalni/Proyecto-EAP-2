@@ -414,7 +414,6 @@ fviz_silhouette(res.pam,print.summary = F)
 silPAM=data.frame(res.pam$silinfo$widths)
 silPAM$País=row.names(silPAM)
 poorPAM=silPAM[silPAM$sil_width<0,'País']%>%sort()
-poorPAM
 ```
 
 ### Visualización
