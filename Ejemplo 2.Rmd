@@ -1,0 +1,238 @@
+---
+title: "Impacto del Género en el PBI Per cápita"
+author: "(EPAP - 2)"
+subtitle: 'Curso: POL304 - Estadística para el análisis político 2'
+output:
+  flexdashboard::flex_dashboard:
+    theme:
+      version: 4
+      bg: "white"
+      fg: "#333333"
+      primary: "#FF0000"
+      navbar-bg: "#FF9933"
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
+    navbar:
+      - { title: "About", icon: "fa-brands fa-github", href: "https://github.com/vvvalni/Proyecto-EAP-2" }
+      - { title: "Valeria Yesquén", icon: "fa fa-user-o", href: "https://vvvalni.github.io/ValeriaYesquenMayanga.github.io/", align: right }
+      - { title: "Sofia Dager", icon: "fa fa-user-o", href: "https://sofiadager.github.io/cv_sofiadager/#work", align: right }
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r include=FALSE}
+library(rio)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+library(modelsummary)
+library(Rmisc)
+library(forcats)
+```
+
+```{r include=FALSE}
+link = "https://github.com/vvvalni/Proyecto-EAP-2/raw/main/Bases%20de%20Datos/data_final.xlsx"
+PBIgen = import(link)
+
+mapMUN=sf::read_sf("shapes/World_Countries_Generalized.shp") #shapefile
+```
+
+```{r}
+#Juntamos información con el shape:
+mapMUN2=merge(mapMUN,PBIgen,by = "ISO", all.x = T) 
+```
+
+# PBI
+
+## Column {data-width="600"}
+
+### Mapa del PBI per cápita por país (2022)
+
+```{r}
+mapaleyenda3= ggplot(mapMUN2)+ geom_sf() + theme_light()
+
+mapaley3= mapaleyenda3 + geom_sf(data=mapMUN2,
+              aes(fill=`pc2022`),color = "white")
+      
+mapa3= mapaley3 +
+coord_sf() + 
+scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=160000, by=20000)) + theme_void() + 
+  
+theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
+  
+labs(title = "PBI per cápita por país") +
+  
+theme(
+plot.title = element_text(color="black", size=10, face="bold"))
+
+mapa3
+```
+
+## Column {data-width="400"} {.tabset}
+
+### Ranking del PBI per cápita por país
+
+```{r include=FALSE}
+PBIPC = PBIgen[,c(2,3)]
+```
+
+```{r echo=FALSE}
+datatable(PBIPC, filter = "top")
+```
+
+### Histograma
+
+```{r}
+pbi_reg <- summarySE(data=PBIgen, measurevar="pc2022", groupvar="Region", na.rm=T)
+```
+
+```{r}
+g1 = pbi_reg %>%
+  mutate(Region = fct_reorder(Region, pc2022)) %>%
+  ggplot( aes(x=Region, y=pc2022)) +
+    geom_bar(stat="identity", fill="#E91E63", alpha=.6, width=.4) +
+    coord_flip() +
+    labs(title = "PBI Percápita por Región",
+    subtitle = "Banco Mundial - Programa de Comparación Internacional",
+    x =" ",
+    y ="PBI Per Cápita") +
+    geom_hline(yintercept = mean(pbi_reg$pc2022) ,linetype="dashed", color="#AD1457",size=1)+
+    theme_bw() +
+    ylim(c(0,70000))+
+    geom_text(aes(label=paste0(round(pc2022,2),"")), vjust=0.5, hjust = 0.5,color="black", size=3)
+
+g1
+```
+
+# Violencia
+
+## Column {data-width="600"}
+
+### Mapa del grado de violencia por país
+
+```{r}
+
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking de violencia por País
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+### Histograma
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+# Restricciones
+
+## Column {data-width="600"}
+
+### Mapa de Restricciones por país
+
+```{r}
+
+```
+
+
+## Column {data-width=400} {.tabset}
+
+### Ranking de Países según libertades restringidas
+
+```{r}
+
+```
+
+
+### Histograma
+
+```{r}
+
+```
+
+
+# Parlamento
+
+## Column {data-width="600"}
+
+### Mapa de la Proporción de mujeres en el Parlamento Nacional (2019)
+
+```{r}
+
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+### Histograma
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+# Modelos
+
+## Column {data-width=400} {.tabset}
+
+### Modelo 1
+
+```{r}
+
+```
+
+### Modelo 2
+
+```{r}
+
+```
+
+### Modelo 3
+
+```{r}
+
+```
+
+### Modelo 4
+
+```{r}
+
+```
+
+# Gráficos
