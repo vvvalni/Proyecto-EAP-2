@@ -419,7 +419,7 @@ silPAM$País=row.names(silPAM)
 poorPAM=silPAM[silPAM$sil_width<0,'País']%>%sort()
 ```
 
-### Visualización
+### Visualización (Mapa)
 
 ```{r}
 
