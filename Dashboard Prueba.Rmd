@@ -29,6 +29,7 @@ library(cluster)
 library(ggrepel)
 library(polycor)
 library(ggcorrplot)
+library(plotly)
 ```
 
 ```{r include=FALSE}
@@ -360,43 +361,19 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ### Visualización 1
 
-
 ```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=8}
-ggplot(PBIgen, aes(x=violencia, y=pc2022)) + 
-  geom_point(size=5, shape=23, color="#ACA4E2") +
-  geom_text(label=PBIgen$País, vjust=-0.5, hjust = 1,color="black", size=3) +
-  
-      labs(x = "Violencia de Género",
-       y = "PBI Per Cápita") +
-
-  geom_smooth(method=lm, se=FALSE, linetype="dashed",
-             color="#E91E63") + theme(panel.background = element_blank())
-```
-
-```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=8}
-d1 <- data.frame(x=PBIgen$violencia, y=PBIgen$pc2022, name= "Correlación entre la Violencia de Género y el PBI Per Cápita")
-
-d1 %>%
-  ggplot(aes(x=x, y=y)) +
-    geom_point(size=5, shape=21, color="#ACA4E2") +
-  labs(x = "Violencia de Género",
-       y = "PBI Per Cápita") +
-    facet_wrap(~name, scale="free")
-```
-```{r}
-# Plotly allows to turn any ggplot2 graphic interactive
 library(plotly)
 
 p <- PBIgen %>% 
-  mutate(text=paste("Apartment Number: ", (PBIge), "\nLocation: New York\nAny other information you need..", sep="")) %>%
+  mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", PBIgen$violencia, "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
   ggplot( aes(x=violencia, y=pc2022, text=text)) +
-    geom_point(size=3, shape=21, color="#ACA4E2") +
+    geom_point(size=3, shape=21, color="#A40A8A") +
     ggtitle("Correlación entre la Violencia de Género y el PBI Per Cápita") +
     theme(
       plot.title = element_text(size=12)
     ) +
     ylab('PBI Per Cápita') +
-    xlab('Índice de Violencia')
+    xlab('Índice de Violencia')+
 
 ggplotly(p, tooltip="text")
 ```
