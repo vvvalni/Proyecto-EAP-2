@@ -167,7 +167,7 @@ g2
 
 ```
 
-# Restricciones de Libertades Civiles de las mujeres
+# Libertades Restringidas
 
 ## Column {data-width="600"}
 
@@ -386,7 +386,7 @@ g.dist = daisy(dataClus, metric="gower")
 ```
 
 
-## Column {data-width="500"} {.tabset} 
+## Column {data-width="400"} {.tabset} 
 
 ### Clusters Generados
 
@@ -397,9 +397,19 @@ dataClus$diana=res.diana$cluster
 ```
 
 ```{r}
-aggregate(.~ diana, data=dataClus,mean)
+original = aggregate(.~ diana, data=dataClus,mean)
+head(original)%>%kbl()%>%kable_styling()
 ```
 
+### Agregar Comentario
+
+Escribe la interpretación aquí bestie. Los países que están mal ubicados son: Azerbaiyán, República de Corea, Kazajstán y Senegal (Están en el grupo 1 y por obvias razones, no pertenecen ahí :v)
+
+
+
+## Column {data-width="600"} {.tabset} 
+
+**Visualización**
 
 ### Silueta
 
@@ -407,16 +417,7 @@ aggregate(.~ diana, data=dataClus,mean)
 fviz_silhouette(res.diana,print.summary = F)
 ```
 
-----------
-
-### Agregar Comentario
-
-Escribe la interpretación aquí bestie. #los países que están mal ubicados son: Azerbaiyán, República de Corea, Kazajstán y Senegal 
-
-
-## Column {data-width="500"}
-
-### Visualización
+### Mapa
 
 ```{r}
 silDIANA=data.frame(res.diana$silinfo$widths)
@@ -427,7 +428,6 @@ poorDIANA=silDIANA[silDIANA$sil_width<0,'País']%>%sort()
 ```{r}
 PBIgen$dianaPCpoor=PBIgen$País%in%poorDIANA
 PBIgen$diana=as.ordered(dataClus$diana)
-dataClus$diana=NULL
 ```
 
 ```{r}
