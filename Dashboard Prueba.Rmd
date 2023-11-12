@@ -386,7 +386,7 @@ g.dist = daisy(dataClus, metric="gower")
 ```
 
 
-## Column {data-width="400"} {.tabset} 
+## Column {data-width="400"}
 
 ### Clusters Generados
 
