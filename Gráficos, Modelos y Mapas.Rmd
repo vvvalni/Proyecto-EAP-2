@@ -116,9 +116,36 @@ g2 = ggplot(dff, aes(x=reorder(pais,pc2022), y=pc2022, fill = type)) +
 g2
 ```
 
-#diagrama de dispersión (distintas rectas)
+#Matriz de Correlación
 
-Matriz de correlaciones
+
+
+# Siluetas:
+
+## PAM
+
+```{r}
+set.seed(123)
+res.pam=pam(g.dist,3,cluster.only = F)
+
+```
+
+```{r}
+fviz_silhouette(res.pam,print.summary = F)
+```
+
+## AGNES
+
+```{r}
+set.seed(123)
+res.agnes<- hcut(g.dist, k = 3,hc_func='agnes',hc_method = "ward.D")
+```
+
+```{r}
+fviz_silhouette(res.agnes,print.summary = F)
+```
+
+## DIANA
 
 ```{r}
 
