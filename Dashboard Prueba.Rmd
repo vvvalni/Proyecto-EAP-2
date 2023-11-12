@@ -361,7 +361,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ### Visualización 1
 
-```{r}
+```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=10,fig.height=8}
 p <- PBIgen %>% 
   mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", PBIgen$violencia, "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
   ggplot( aes(x=violencia, y=pc2022, text=text)) +
@@ -370,11 +370,12 @@ p <- PBIgen %>%
     theme(
       plot.title = element_text(size=12)
     ) +
-    ylab('PBI Per Cápita ($))') +
-    xlab('Índice de Violencia')
+    ylab('PBI Per Cápita ($)') +
+    xlab('Índice de Violencia')+ theme_light()
 
 ggplotly(p, tooltip="text")
 ```
+
 
 ### Visualización 2
 
