@@ -381,45 +381,72 @@ dataClus=PBIgen[,c(3,5:7)]
 row.names(dataClus)=PBIgen$País
 ```
 
-
 ```{r}
 g.dist = daisy(dataClus, metric="gower")
 ```
 
-## Column {data-width="600"} {.tabset}
 
-### Construcción del Cluster
+## Column {data-width="500"} {.tabset} 
+
+### Clusters Generados
 
 ```{r}
 set.seed(123)
-res.pam=pam(g.dist,3,cluster.only = F)
-
-#nueva columna
-dataClus$pam=res.pam$cluster
-
-# ver
-
-head(dataClus,15)%>%kbl()%>%kable_styling()
+res.diana <- hcut(g.dist, k = 3,hc_func='diana')
+dataClus$diana=res.diana$cluster
 ```
+
+```{r}
+aggregate(.~ diana, data=dataClus,mean)
+```
+
 
 ### Silueta
 
 ```{r}
-fviz_silhouette(res.pam,print.summary = F)
+fviz_silhouette(res.diana,print.summary = F)
 ```
 
-## Column {data-width="400"} {.tabset}
+----------
+
+### Agregar Comentario
+
+Escribe la interpretación aquí bestie. #los países que están mal ubicados son: Azerbaiyán, República de Corea, Kazajstán y Senegal 
+
+
+## Column {data-width="500"}
+
+### Visualización - Mapa
 
 ```{r}
-silPAM=data.frame(res.pam$silinfo$widths)
-silPAM$País=row.names(silPAM)
-poorPAM=silPAM[silPAM$sil_width<0,'País']%>%sort()
+silDIANA=data.frame(res.diana$silinfo$widths)
+silDIANA$País=row.names(silDIANA)
+poorDIANA=silDIANA[silDIANA$sil_width<0,'País']%>%sort()
 ```
-
-### Visualización
 
 ```{r}
-
+PBIgen$dianaPCpoor=PBIgen$País%in%poorDIANA
+PBIgen$dianaPC=as.ordered(dataClus$diana)
+dataClus$diana=NULL
 ```
 
+```{r}
+mapaleyenda4= ggplot(mapMUN2)+ geom_sf() + theme_light()
+
+mapaley4= mapaleyenda3 + geom_sf(data=mapMUN2,
+              aes(fill=`d`),color = "white")
+      
+mapa4= mapaley4 +
+coord_sf() + 
+scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=160000, by=20000)) + theme_void() + 
+  
+theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
+  
+labs(title = "PBI per cápita por país") +
+  
+theme(
+plot.title = element_text(color="black", size=10, face="bold"))
+
+mapa3
+```
 
