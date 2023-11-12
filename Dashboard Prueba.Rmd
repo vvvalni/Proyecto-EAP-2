@@ -6,8 +6,8 @@ output:
   flexdashboard::flex_dashboard:
     navbar:
       - { title: "About", icon: "fa-brands fa-github", href: "https://github.com/vvvalni/Proyecto-EAP-2" }
-      - { title: "Valeria Yesquén", icon: "fa fa-user-o", href: "https://vvvalni.github.io/ValeriaYesquenMayanga.github.io/", align: right }
-      - { title: "Sofia Dager", icon: "fa fa-user-o", href: "https://sofiadager.github.io/cv_sofiadager/#work", align: right }
+      - { title: "V.Yesquén", icon: "fa fa-user-o", href: "https://vvvalni.github.io/ValeriaYesquenMayanga.github.io/", align: right }
+      - { title: "S.Dager", icon: "fa fa-user-o", href: "https://sofiadager.github.io/cv_sofiadager/#work", align: right }
     orientation: columns
     vertical_layout: fill
 ---
@@ -361,7 +361,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ### Visualización 1
 
-```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=10,fig.height=8}
+```{r}
 p <- PBIgen %>% 
   mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", PBIgen$violencia, "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
   ggplot( aes(x=violencia, y=pc2022, text=text)) +
