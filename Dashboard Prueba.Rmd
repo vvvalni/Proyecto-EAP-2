@@ -416,7 +416,7 @@ Escribe la interpretación aquí bestie. #los países que están mal ubicados so
 
 ## Column {data-width="500"}
 
-### Visualización - Mapa
+### Visualización
 
 ```{r}
 silDIANA=data.frame(res.diana$silinfo$widths)
@@ -426,27 +426,34 @@ poorDIANA=silDIANA[silDIANA$sil_width<0,'País']%>%sort()
 
 ```{r}
 PBIgen$dianaPCpoor=PBIgen$País%in%poorDIANA
-PBIgen$dianaPC=as.ordered(dataClus$diana)
+PBIgen$diana=as.ordered(dataClus$diana)
 dataClus$diana=NULL
 ```
 
 ```{r}
-mapaleyenda4= ggplot(mapMUN2)+ geom_sf() + theme_light()
+mapMUN3=merge(mapMUN,PBIgen,by = "ISO", all.x = T) 
+```
 
-mapaley4= mapaleyenda3 + geom_sf(data=mapMUN2,
-              aes(fill=`d`),color = "white")
+```{r}
+mapaleyenda4= ggplot(mapMUN3)+ geom_sf() + theme_light()
+
+mapaley4= mapaleyenda4 + geom_sf(data=mapMUN3,
+              aes(fill=`diana`),color = "white")
       
 mapa4= mapaley4 +
 coord_sf() + 
-scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=160000, by=20000)) + theme_void() + 
+scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) + theme_void() +
   
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
   
-labs(title = "PBI per cápita por país") +
+theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
+  
+labs(title = "Países por Grupos") +
   
 theme(
-plot.title = element_text(color="black", size=10, face="bold"))
+plot.title = element_text(color="black", size=11, face="bold"))
 
-mapa3
+mapa4
 ```
+
+
 
