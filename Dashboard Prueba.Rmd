@@ -363,7 +363,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=8}
 ggplot(PBIgen, aes(x=violencia, y=pc2022)) + 
-  geom_point(size=3, shape=23, color="#CDDC39") +
+  geom_point(size=5, shape=23, color="#ACA4E2") +
   geom_text(label=PBIgen$País, vjust=-0.5, hjust = 1,color="black", size=3) +
   
       labs(x = "Violencia de Género",
@@ -371,6 +371,15 @@ ggplot(PBIgen, aes(x=violencia, y=pc2022)) +
 
   geom_smooth(method=lm, se=FALSE, linetype="dashed",
              color="#E91E63") + theme(panel.background = element_blank())
+```
+
+```{r}
+d1 <- data.frame(x=PBIgen$violencia, y=PBIgen$pc2022, name= "Correlación entre la Violencia de Género y el PBI Per Cápita")
+
+d1 %>%
+  ggplot(aes(x=x, y=y)) +
+    geom_point(size=5, shape=21, color="#ACA4E2") +
+    facet_wrap(~name, scale="free")
 ```
 
 ### Visualización 2
@@ -497,6 +506,8 @@ plot.title = element_text(color="black", size=11, face="bold"))
 
 mapa4
 ```
+
+# Otras Visualizaciones
 
 
 
