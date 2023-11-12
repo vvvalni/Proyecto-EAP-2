@@ -296,7 +296,7 @@ g4
 
 # Modelos estadísticos
 
-## Column {data-width=400} {.tabset}
+## Column {data-width=500} {.tabset}
 
 ### OLS 1
 
@@ -356,12 +356,12 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
-## Column {data-width=600} {.tabset}
+## Column {data-width=500} {.tabset}
 
 ### Visualización 1
 
 
-```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=10,fig.height=10}
+```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=8}
 ggplot(PBIgen, aes(x=violencia, y=pc2022)) + 
   geom_point(size=3, shape=23, color="#CDDC39") +
   geom_text(label=PBIgen$País, vjust=-0.5, hjust = 1,color="black", size=3) +
