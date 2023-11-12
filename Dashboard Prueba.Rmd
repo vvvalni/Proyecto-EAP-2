@@ -27,6 +27,8 @@ library(forcats)
 library(factoextra)
 library(cluster)
 library(ggrepel)
+library(polycor)
+library(ggcorrplot)
 ```
 
 ```{r include=FALSE}
@@ -296,7 +298,7 @@ g4
 
 ## Column {data-width=400} {.tabset}
 
-### Modelo 1
+### OLS 1
 
 ```{r}
 modelo1=formula(pc2022~violencia)
@@ -309,7 +311,7 @@ modelsummary(model1, title = "Regresion: modelo 1",
              output = "kableExtra")
 ```
 
-### Modelo 2
+### OLS 2
 
 ```{r}
 modelo2=formula(pc2022~violencia + escaños2019)
@@ -323,7 +325,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
-### Modelo 3
+### OLS 3
 
 ```{r}
 modelo3=formula(pc2022~violencia + escaños2019 + restricción2019)
@@ -338,7 +340,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
-### Modelo 4
+### OLS 4
 
 ```{r}
 modelo4=formula(pc2022~violencia + escaños2019 + restricción2019 + PT2022)
@@ -356,23 +358,69 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ## Column {data-width=600} {.tabset}
 
-### Gráfico - Modelo 1
+### Visualización 1
 
-```{r include=FALSE}
 
+```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=10,fig.height=10}
+ggplot(PBIgen, aes(x=violencia, y=pc2022)) + 
+  geom_point(size=3, shape=23, color="#CDDC39") +
+  geom_text(label=PBIgen$País, vjust=-0.5, hjust = 1,color="black", size=3) +
+  
+      labs(x = "Violencia de Género",
+       y = "PBI Per Cápita") +
+
+  geom_smooth(method=lm, se=FALSE, linetype="dashed",
+             color="#E91E63") + theme(panel.background = element_blank())
+```
+
+### Visualización 2
+
+```{r}
+cor_1 = PBIgen[,c("violencia", "pc2022","escaños2019")]
 ```
 
 ```{r echo=FALSE}
-
+corMatrix_1=polycor::hetcor(cor_1)$correlations
 ```
 
-### Grafico - Modelo 2
+
+```{r}
+ggcorrplot(corMatrix_1,hc.order = TRUE, outline.color = "white",
+            ggtheme = ggplot2::theme_get(),
+   colors = c("#6D9EC1", "white", "#E46726"))
+```
+
+### Visualización 3
+
+```{r}
+cor_2 = PBIgen[,c("violencia", "pc2022","escaños2019", "restricción2019")]
+```
+
+```{r}
+corMatrix_2=polycor::hetcor(cor_2)$correlations
+```
+
+```{r}
+ggcorrplot(corMatrix_2, hc.order = TRUE, outline.color = "white",
+            ggtheme = ggplot2::theme_get(),
+   colors = c("#89C665", "white", "#AC7299"))
+```
+
+### Visualización 4
+
+```{r}
+cor_3 = PBIgen[,c("violencia", "pc2022","escaños2019", "restricción2019", "PT2022")]
+```
 
 ```{r echo=FALSE}
-
+corMatrix_3=polycor::hetcor(cor_3)$correlations
 ```
 
-### Grafico - Modelo 3
+```{r}
+ggcorrplot(corMatrix_3, hc.order = TRUE, outline.color = "white",
+            ggtheme = ggplot2::theme_gray,
+   colors = c("#68B5D7", "white", "#DD708E"))
+```
 
 # Clusters
 
@@ -384,7 +432,6 @@ row.names(dataClus)=PBIgen$País
 ```{r}
 g.dist = daisy(dataClus, metric="gower")
 ```
-
 
 ## Column {data-width="400"}
 
@@ -405,11 +452,7 @@ head(original)%>%kbl()%>%kable_styling()
 
 Escribe la interpretación aquí bestie. Los países que están mal ubicados son: Azerbaiyán, República de Corea, Kazajstán y Senegal (Están en el grupo 1 y por obvias razones, no pertenecen ahí :v)
 
-
-
 ## Column {data-width="600"} {.tabset} 
-
-**Visualización**
 
 ### Silueta
 
