@@ -30,6 +30,11 @@ library(ggrepel)
 library(polycor)
 library(ggcorrplot)
 library(plotly)
+library(viridis)
+library(ggiraph)
+library(widgetframe)
+library(ggthemes)
+
 ```
 
 ```{r include=FALSE}
@@ -52,23 +57,16 @@ mapMUN2=merge(mapMUN,PBIgen,by = "ISO", all.x = T)
 ### Mapa del PBI per cápita por país (2022)
 
 ```{r}
-mapaleyenda3= ggplot(mapMUN2)+ geom_sf() + theme_light()
-
-mapaley3= mapaleyenda3 + geom_sf(data=mapMUN2,
-              aes(fill=`pc2022`),color = "white")
-      
-mapa3= mapaley3 +
-coord_sf() + 
-scale_fill_gradient(low = "#FCE4EC",  high = "#880E4F", breaks=seq(from=0, to=160000, by=20000)) + theme_void() + 
+mapa1 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = pc2022), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "A", breaks=seq(from=0, to=120000, by=20000),
+                     name= "PBI") +
+  labs(title ="PBI Per Cápita - Mapeo Mundial 2022", subtitle='Precios Internacionales Actuales ($)', caption="Data: Banco Mundial")+
+  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
   
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
-  
-labs(title = "PBI per cápita por país") +
-  
-theme(
-plot.title = element_text(color="black", size=10, face="bold"))
-
-mapa3
+mapa1
 ```
 
 ## Column {data-width=400} {.tabset}
@@ -114,23 +112,16 @@ g1
 ### Mapa del grado de violencia por país
 
 ```{r}
-mapaleyendaL= ggplot(mapMUN2)+ geom_sf() + theme_light()
+mapa2 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = violencia), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "H",
+                     name= "Índice") +
+  labs(title ="Violencia de Género - Mapeo Mundial", subtitle='Índice de Violencia 2019, OCDE', caption="Data: OECD Data Inequality - Violence Agains Women")+
+  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
 
-mapaleyL= mapaleyendaL + geom_sf(data=mapMUN2,
-              aes(fill=`violencia`),color = "white")
-      
-mapa1= mapaleyL +
-coord_sf() + 
-scale_fill_gradient(low = "#F3E5F5",  high = "#4A148C", breaks=seq(from=0, to=100, by=10)) + theme_void() + 
-  
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
-  
-labs(title = "Índice de violencia de género por país") +
-  
-theme(
-plot.title = element_text(color="black", size=10, face="bold"))
-
-mapa1
+mapa2
 ```
 
 ## Column {data-width=400} {.tabset}
@@ -177,24 +168,16 @@ g2
 ### Mapa de Restricciones por país
 
 ```{r}
-mapaleyenda2= ggplot(mapMUN2)+ geom_sf() + theme_light()
-
-mapaley2= mapaleyenda2 + geom_sf(data=mapMUN2,
-              aes(fill=`restricción2019`),color = "white")
-      
-mapa2= mapaley2 +
-coord_sf() + 
-scale_fill_gradient(low = "#D0E8F2",  high = "#080E5B", breaks=seq(from=0, to=100, by=10)) + theme_void() + 
+mapa3 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = restricción2019), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "G",
+                     name= "Índice") +
+  labs(title ="Restricción de Libertades de Mujeres - Mapeo Mundial", subtitle='Índice de Restricción de Libertades Civiles 2019, OCDE', caption="Data: OECD. Stat Social Institutions and Gender Index")+
+  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
   
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
-  
-labs(title = "Restricción de libertades civiles de las mujeres") +
-  
-theme(
-plot.title = element_text(color="black", size=10, face="bold"))
-
-mapa2
-
+mapa3
 ```
 
 ## Column {data-width=400} {.tabset}
@@ -240,22 +223,15 @@ g3
 ### Mapa de la Proporción de mujeres en el Parlamento Nacional (2019)
 
 ```{r}
-mapaleyenda4= ggplot(mapMUN2)+ geom_sf() + theme_light()
-
-mapaley4= mapaleyenda4 + geom_sf(data=mapMUN2,
-              aes(fill=`escaños2019`),color = "white")
-      
-mapa4= mapaley4 +
-coord_sf() + 
-scale_fill_gradient(low = "#FADDC3",  high = "#EA4C3B", breaks=seq(from=0, to=100, by=10)) + theme_void() + 
+mapa4 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = escaños2019), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "F",
+                     name= "Índice") +
+  labs(title ="Escaños Ocupados por Mujeres en el Parlamento - Mapeo Mundial", subtitle='Proporción de Escaños ocupados - 2019, OCDE', caption="Data: Banco Mundial. Gender Data Portal")+
+  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
   
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "right") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
-  
-labs(title = "Proporción de escaños ocupados por Mujeres") +
-  
-theme(
-plot.title = element_text(color="black", size=10, face="bold"))
-
 mapa4
 ```
 
@@ -494,7 +470,9 @@ scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) + theme_void() +
   
 theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
   
-labs(title = "Países por Grupos") +
+labs(title ="Países Clusterizados", subtitle='Agrupación en base a las Variables Independientes propuestas')+
+  theme(plot.title = element_text(size = 15, hjust = 0.5))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.5))
   
 theme(
 plot.title = element_text(color="black", size=11, face="bold"))
@@ -502,7 +480,7 @@ plot.title = element_text(color="black", size=11, face="bold"))
 mapa4
 ```
 
-# Otras Visualizaciones
+
 
 
 
