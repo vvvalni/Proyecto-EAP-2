@@ -118,7 +118,7 @@ mapa2 = ggplot(mapMUN2) +
   scale_fill_viridis(option = "H",
                      name= "Índice") +
   labs(title ="Violencia de Género - Mapeo Mundial", subtitle='Índice de Violencia 2019, OCDE', caption="Data: OECD Data Inequality - Violence Agains Women")+
-  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.title = element_text(size = 15, hjust = 0.67))+
   theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
 
 mapa2
@@ -174,7 +174,7 @@ mapa3 = ggplot(mapMUN2) +
   scale_fill_viridis(option = "G",
                      name= "Índice") +
   labs(title ="Restricción de Libertades de Mujeres - Mapeo Mundial", subtitle='Índice de Restricción de Libertades Civiles 2019, OCDE', caption="Data: OECD. Stat Social Institutions and Gender Index")+
-  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  theme(plot.title = element_text(size = 15, hjust = 0.8))+
   theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
   
 mapa3
@@ -228,8 +228,8 @@ mapa4 = ggplot(mapMUN2) +
   theme_void() +
   scale_fill_viridis(option = "F",
                      name= "Índice") +
-  labs(title ="Escaños Ocupados por Mujeres en el Parlamento - Mapeo Mundial", subtitle='Proporción de Escaños ocupados - 2019, OCDE', caption="Data: Banco Mundial. Gender Data Portal")+
-  theme(plot.title = element_text(size = 15, hjust = 0.6))+
+  labs(title ="Mujeres en el Parlamento - Mapeo Mundial", subtitle='Proporción de Escaños ocupados - 2019, OCDE', caption="Data: Banco Mundial. Gender Data Portal")+
+  theme(plot.title = element_text(size = 15, hjust = 0.65))+
   theme(plot.subtitle = element_text(size = 10, hjust = 0.6))
   
 mapa4
@@ -458,27 +458,19 @@ mapMUN3=merge(mapMUN,PBIgen,by = "ISO", all.x = T)
 ```
 
 ```{r}
-mapaleyenda4= ggplot(mapMUN3)+ geom_sf() + theme_light()
-
-mapaley4= mapaleyenda4 + geom_sf(data=mapMUN3,
-              aes(fill=`diana`),color = "white")
-      
-mapa4= mapaley4 +
-coord_sf() + 
-scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) + theme_void() +
+mapa5 = ggplot(mapMUN3) +
+  geom_sf(aes(fill = diana), color = "white") +
+  theme_void() +
+  scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) +
+  labs(title ="Países Clusterizados", subtitle='Agrupación en base a las Variables Independientes Propuestas')+
+  theme(plot.title = element_text(size = 15, hjust = 0.52))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.52))+
   
+  theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8))
   
-theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8)) +
-  
-labs(title ="Países Clusterizados", subtitle='Agrupación en base a las Variables Independientes propuestas')+
-  theme(plot.title = element_text(size = 15, hjust = 0.5))+
-  theme(plot.subtitle = element_text(size = 10, hjust = 0.5))
-  
-theme(
-plot.title = element_text(color="black", size=11, face="bold"))
-
-mapa4
+mapa5
 ```
+
 
 
 
