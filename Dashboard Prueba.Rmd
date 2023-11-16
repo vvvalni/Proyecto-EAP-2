@@ -337,21 +337,20 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ### Visualización 1
 
-```{r}
+```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=19}
 p <- PBIgen %>% 
-  mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", PBIgen$violencia, "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
-  ggplot( aes(x=violencia, y=pc2022, text=text)) +
-    geom_point(size=3, shape=23, color="#A40A8A") +
+  mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", (paste0(PBIgen$violencia,"%")), "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
+  ggplot( aes(x=violencia, y=pc2022, text=text, color = Region)) +
+    geom_point(size=3, shape=23) +
     ggtitle("Correlación entre la Violencia de Género y el PBI Per Cápita") +
     theme(
-      plot.title = element_text(size=12)
+      plot.title = element_text(size=12, family = "Cormorant Garamond")
     ) +
     ylab('PBI Per Cápita ($)') +
-    xlab('Índice de Violencia')+ theme_light()
+    xlab('Índice de Violencia')+ theme_light() + scale_color_viridis(discrete=TRUE, option="C")
 
-ggplotly(p, tooltip="text")
+ggplotly(p, tooltip="text") 
 ```
-
 
 ### Visualización 2
 
