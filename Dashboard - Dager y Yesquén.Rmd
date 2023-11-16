@@ -439,7 +439,7 @@ original = aggregate(.~ diana, data=dataClus,mean)
 head(original)%>%kbl()%>%kable_styling()
 ```
 
-### Agregar Comentario
+### Observaciones
 
 Despúes de decidir usar Diana, dado que es el método que nos brinda una mejor silueta, vemos que se ha dividido a los países en tres grupos diferentes en base a las variables independientes. Los países que están mal ubicados son: Azerbaiyán, República de Corea, Kazajstán y Senegal. Estos aparecen  dentro del primer grupo, sin embargo, al ver la data, sabemos que no deben encontrarse ahí. Por ejemplo, Kazajstán tiene un alto índice de violencia (37.4) y un alto nivel de libertades civiles restringidas (21.8) por lo que debería pertecer a otro grupo. Los países del primer grupo, en promedio, tienen niveles más bajos en esas variables. Por ejemplo, España tiene 9.6 y 5.8 respectivamente. Además, como se observa en la tabla generada, el primer grupo está caracterizado por un alto PBI per cápita, un bajo índice de violencia de género, así como de libertades civiles de las mujeres, y un relativo porcentaje de escaños ocupados de mujeres en el parlamento. Estas, claramente, son características que estos países mal clusterizados, no comparten. 
 
