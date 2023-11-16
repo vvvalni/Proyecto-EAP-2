@@ -186,7 +186,7 @@ mapa3 = ggplot(mapMUN2) +
   scale_fill_viridis(option = "G",
                      name= "Índice") +
   labs(title ="Restricción de Libertades de Mujeres - Mapeo Mundial", subtitle='Índice de Restricción de Libertades Civiles 2019, OCDE', caption="Data: OECD. Stat Social Institutions and Gender Index")+
-  theme(plot.title = element_text(size = 39, hjust = 0.63, family = "Cormorant Garamond"))+
+  theme(plot.title = element_text(size = 35, hjust = 0.63, family = "Cormorant Garamond"))+
   theme(plot.subtitle = element_text(size = 19, hjust = 0.55, family = "Merriweather"))
   
 mapa3
