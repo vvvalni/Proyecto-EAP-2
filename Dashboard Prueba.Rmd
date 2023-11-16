@@ -349,7 +349,7 @@ modelsummary(models, title = "Resultados de todos los modelos",
 
 ### Visualización 1
 
-```{r echo=FALSE,message=FALSE,eval=TRUE,fig.show='hold',fig.width=8,fig.height=19}
+```{r}
 p <- PBIgen %>% 
   mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", (paste0(PBIgen$violencia,"%")), "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
   ggplot( aes(x=violencia, y=pc2022, text=text, color = Region)) +
