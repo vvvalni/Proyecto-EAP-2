@@ -241,7 +241,7 @@ mapa4 = ggplot(mapMUN2) +
   scale_fill_viridis(option = "F",
                      name= "Índice") +
   labs(title ="Mujeres en el Parlamento - Mapeo Mundial", subtitle='Proporción de Escaños ocupados - 2019, OCDE', caption="Data: Banco Mundial. Gender Data Portal")+
-  theme(plot.title = element_text(size = 35, hjust = 0.6, family = "Cormorant Garamond"))+
+  theme(plot.title = element_text(size = 30, hjust = 0.6, family = "Cormorant Garamond"))+
   theme(plot.subtitle = element_text(size = 19, hjust = 0.58, family = "Merriweather"))
   
 mapa4
