@@ -37,6 +37,18 @@ library(ggthemes)
 
 ```
 
+```{r}
+library(showtext)
+font_add_google("Cormorant Garamond", family = "Cormorant Garamond")
+showtext_auto()
+```
+
+```{r}
+font_add_google("Merriweather", family = "Merriweather")
+showtext_auto()
+```
+
+
 ```{r include=FALSE}
 link = "https://github.com/vvvalni/Proyecto-EAP-2/raw/main/Bases%20de%20Datos/data_final.xlsx"
 PBIgen = import(link)
