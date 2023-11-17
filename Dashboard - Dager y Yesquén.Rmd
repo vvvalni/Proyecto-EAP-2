@@ -4,6 +4,7 @@ author: "EPAP - 2"
 subtitle: 'Curso: POL304 - Estadística para el análisis político 2'
 output: 
   flexdashboard::flex_dashboard:
+    theme: journal
     navbar:
       - { title: "About", icon: "fa-brands fa-github", href: "https://github.com/vvvalni/Proyecto-EAP-2" }
       - { title: "V.Yesquén", icon: "fa fa-user-o", href: "https://vvvalni.github.io/ValeriaYesquenMayanga.github.io/", align: right }
