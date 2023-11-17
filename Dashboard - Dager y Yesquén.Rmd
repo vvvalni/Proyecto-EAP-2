@@ -377,8 +377,9 @@ corMatrix_1=polycor::hetcor(cor_1)$correlations
 
 
 ```{r}
-ggcorrplot(corMatrix_1,hc.order = TRUE, outline.color = "white",
-            ggtheme = ggplot2::theme_get(),
+ggcorrplot(corMatrix_1,hc.order = TRUE, outline.color = "white", 
+           lab = TRUE, lab_size = 5,
+            ggtheme = ggplot2::theme_get(), 
    colors = c("#6D9EC1", "white", "#E46726"))
 ```
 
@@ -394,6 +395,7 @@ corMatrix_2=polycor::hetcor(cor_2)$correlations
 
 ```{r}
 ggcorrplot(corMatrix_2, hc.order = TRUE, outline.color = "white",
+           lab = TRUE, lab_size = 5,
             ggtheme = ggplot2::theme_get(),
    colors = c("#89C665", "white", "#AC7299"))
 ```
@@ -410,6 +412,7 @@ corMatrix_3=polycor::hetcor(cor_3)$correlations
 
 ```{r}
 ggcorrplot(corMatrix_3, hc.order = TRUE, outline.color = "white",
+           lab = TRUE, lab_size = 5,
             ggtheme = ggplot2::theme_gray,
    colors = c("#68B5D7", "white", "#DD708E"))
 ```
