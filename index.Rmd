@@ -396,7 +396,7 @@ corMatrix_3=polycor::hetcor(cor_3)$correlations
 
 ```{r}
 ggcorrplot(corMatrix_3, hc.order = TRUE, outline.color = "white",
-           lab = TRUE, lab_size = 2,
+           lab = TRUE, lab_size = 3,
             ggtheme = ggplot2::theme_gray,
    colors = c("#68B5D7", "white", "#DD708E"))
 ```
