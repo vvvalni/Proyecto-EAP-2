@@ -96,7 +96,7 @@ g1 = pbi_reg %>%
     geom_bar(stat="identity", fill="#E91E63", alpha=.6, width=.4) +
     coord_flip() +
     labs(title = "PBI Percápita por Región",
-    subtitle = "Banco Mundial - Programa de Comparación Internacional",
+    subtitle = "Programa de Comparación Internacional",
     x =" ",
     y ="PBI Per Cápita") +
     geom_hline(yintercept = mean(pbi_reg$pc2022) ,linetype="dashed", color="#AD1457",size=1)+
@@ -150,7 +150,7 @@ g2 = vio_reg %>%
     geom_bar(stat="identity", fill="#AC6A9F", alpha=.6, width=.4) +
     coord_flip() +
     labs(title = "Violencia hacia la Mujer por Región",
-    subtitle = "Organización para la Cooperación y el Desarrollo Económico (OECD)",
+    subtitle = "OECD",
     x =" ",
     y ="% de Violencia") +
     geom_hline(yintercept = mean(vio_reg$violencia) ,linetype="dashed", color="#4A148C",size=1)+
@@ -203,10 +203,10 @@ g3 = lib_reg %>%
   ggplot( aes(x=Region, y=restricción2019)) +
     geom_bar(stat="identity", fill="#8AE8AE", alpha=.6, width=.4) +
     coord_flip() +
-    labs(title = "Restricción de Libertades de las Mujeres por Región",
-    subtitle = "OECD - Stat Social Institutions and Gender Index",
+    labs(title = "Restricción de Libertades a las Mujeres",
+    subtitle = paste("Stat Social Institutions and Gender Index", "\n(OECD)"),
     x =" ",
-    y ="Restricción de Libertades (%)") +
+    y ="Porcentaje de Restricciones") +
     geom_hline(yintercept = mean(lib_reg$restricción2019) ,linetype="dashed", color="#005D67",size=1)+
     theme_bw() +
     ylim(c(0,50))+
@@ -256,7 +256,7 @@ g4 = escaños_reg %>%
   ggplot( aes(x=Region, y=escaños2019)) +
     geom_bar(stat="identity", fill="#F6A376", alpha=.6, width=.4) +
     coord_flip() +
-    labs(title = "Proporción de Mujeres en el Parlamento por Región",
+    labs(title = "Mujeres en el Parlamento",
     subtitle = "Banco Mundial - Gender Data Portal",
     x =" ",
     y ="Proporción de escaños ocupados") +
