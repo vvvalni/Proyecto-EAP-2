@@ -1,9 +1,9 @@
 # Impacto del Género en el PBI Per cápita - EAP2 
-Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curso de Estadística para el Análisis Político 2
+Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curso de Estadística para el Análisis Político
 
 **Integrantes:** 
 - Sofia Dager
-- Valeria Yesquen
+- Valeria Yesquén
 
 ## Bases de datos utilizadas y Variables a Utilizar
 
