@@ -1,5 +1,9 @@
 # Impacto del Género en el PBI Per cápita - EAP2 
-Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curso
+Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curso de Estadística para el Análisis Político
+
+**Integrantes:** 
+- Sofia Dager
+- Valeria Yesquén
 
 ## Bases de datos utilizadas y Variables a Utilizar
 
@@ -29,6 +33,3 @@ Repositorio con los contenidos a utilizar para el Proyecto Grupal Final del Curs
 ### Unidad de Análisis
 País: Las bases de datos están organizadas en base a los países. Asimismo, cada país posee un código específico (en algunas bases está como Country Code, en otras como Economy Code y en otras como Location), el cual será empleado para el merge de las distintas bases. 
 
-### Integrantes: 
-- Sofia Dager
-- Valeria Yesquen
