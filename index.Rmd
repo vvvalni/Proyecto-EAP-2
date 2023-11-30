@@ -1,0 +1,484 @@
+---
+title: "Impacto del Género en el PBI Per cápita"
+author: "EPAP - 2"
+subtitle: 'Curso: POL304 - Estadística para el análisis político 2'
+output: 
+  flexdashboard::flex_dashboard:
+    theme: journal
+    navbar:
+      - { title: "About", icon: "fa fa-github", href: "https://github.com/vvvalni/Proyecto-EAP-2" }
+      - { title: "V.Yesquén", icon: "fa fa-user-o", href: "https://vvvalni.github.io/ValeriaYesquenMayanga.github.io/", align: right }
+      - { title: "S.Dager", icon: "fa fa-user-o", href: "https://sofiadager.github.io/cv_sofiadager/#work", align: right }
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r include=FALSE}
+library(rio)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+library(modelsummary)
+library(Rmisc)
+library(forcats)
+library(factoextra)
+library(cluster)
+library(ggrepel)
+library(polycor)
+library(ggcorrplot)
+library(plotly)
+library(viridis)
+library(ggiraph)
+library(widgetframe)
+library(ggthemes)
+
+```
+
+
+```{r include=FALSE}
+link = "https://github.com/vvvalni/Proyecto-EAP-2/raw/main/Bases%20de%20Datos/data_final.xlsx"
+PBIgen = import(link)
+
+```
+
+```{r}
+mapMUN=sf::read_sf("shapes/World_Countries_Generalized.shp") #shapefile
+```
+
+```{r}
+#Juntamos información con el shape:
+mapMUN2=merge(mapMUN,PBIgen,by = "ISO", all.x = T) 
+```
+
+
+# PBI per cápita
+
+## Column {data-width="600"} 
+
+### Mapeo Mundial del PBI Per Cápita (2022)
+
+```{r}
+mapa1 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = pc2022), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "A", breaks=seq(from=0, to=120000, by=20000), name= "PBI") +
+  labs(caption ="Data: Banco Mundial")
+  
+mapa1
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking del PBI per cápita por país
+
+```{r include=FALSE}
+PBIPC = PBIgen[,c(2,3)]
+```
+
+```{r echo=FALSE}
+datatable(PBIPC, filter = "top")
+```
+
+### Histograma
+
+```{r echo=FALSE}
+pbi_reg <- summarySE(data=PBIgen, measurevar="pc2022", groupvar="Region", na.rm=T)
+```
+
+```{r}
+g1 = pbi_reg %>%
+  mutate(Region = fct_reorder(Region, pc2022)) %>%
+  ggplot( aes(x=Region, y=pc2022)) +
+    geom_bar(stat="identity", fill="#E91E63", alpha=.6, width=.4) +
+    coord_flip() +
+    labs(title = "PBI Percápita por Región",
+    subtitle = "Banco Mundial - Programa de Comparación Internacional",
+    x =" ",
+    y ="PBI Per Cápita") +
+    geom_hline(yintercept = mean(pbi_reg$pc2022) ,linetype="dashed", color="#AD1457",size=1)+
+    theme_bw() +
+    ylim(c(0,70000))+
+    geom_text(aes(label=paste0(round(pc2022,2),"")), vjust=0.5, hjust = 0.5,color="black", size=3)
+
+g1
+```
+
+
+# Violencia de Género
+
+## Column {data-width="600"}
+
+### Violencia de Género - Mapeo Mundial
+
+```{r}
+mapa2 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = violencia), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "H",
+                     name= "Índice") +
+  labs(caption="Data: OECD Data Inequality - Violence Agains Women")
+
+mapa2
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking de violencia por País
+
+```{r include=FALSE}
+violencia = PBIgen[,c(2,5)]
+```
+
+```{r}
+datatable(violencia, filter = "top")
+```
+
+### Histograma
+
+```{r}
+vio_reg <- summarySE(data=PBIgen, measurevar="violencia", groupvar="Region", na.rm=T)
+```
+
+```{r echo=FALSE}
+g2 = vio_reg %>%
+  mutate(Region = fct_reorder(Region, violencia)) %>%
+  ggplot( aes(x=Region, y=violencia)) +
+    geom_bar(stat="identity", fill="#AC6A9F", alpha=.6, width=.4) +
+    coord_flip() +
+    labs(title = "Violencia hacia la Mujer por Región",
+    subtitle = "Organización para la Cooperación y el Desarrollo Económico (OECD)",
+    x =" ",
+    y ="% de Violencia") +
+    geom_hline(yintercept = mean(vio_reg$violencia) ,linetype="dashed", color="#4A148C",size=1)+
+    theme_bw() +
+    ylim(c(0,60))+
+    geom_text(aes(label=paste0(round(violencia,2),"%")), vjust=0.5, hjust = -0.1,color="black", size=3)
+
+g2
+
+```
+
+# Libertades Restringidas
+
+## Column {data-width="600"}
+
+### Restricción de Libertades - Mapeo Mundial
+
+```{r}
+mapa3 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = restricción2019), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "G",
+                     name= "Índice") +
+  labs(caption="Data: OECD. Stat Social Institutions and Gender Index")
+  
+mapa3
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking de Países según libertades restringidas
+
+```{r include=FALSE}
+Restricciones = PBIgen[,c(2,7)]
+```
+
+```{r}
+datatable(Restricciones, filter = "top")
+```
+
+### Histograma
+
+```{r echo=FALSE}
+lib_reg <- summarySE(data=PBIgen, measurevar="restricción2019", groupvar="Region", na.rm=T)
+```
+
+```{r}
+g3 = lib_reg %>%
+  mutate(Region = fct_reorder(Region, restricción2019)) %>%
+  ggplot( aes(x=Region, y=restricción2019)) +
+    geom_bar(stat="identity", fill="#8AE8AE", alpha=.6, width=.4) +
+    coord_flip() +
+    labs(title = "Restricción de Libertades de las Mujeres por Región",
+    subtitle = "OECD - Stat Social Institutions and Gender Index",
+    x =" ",
+    y ="Restricción de Libertades (%)") +
+    geom_hline(yintercept = mean(lib_reg$restricción2019) ,linetype="dashed", color="#005D67",size=1)+
+    theme_bw() +
+    ylim(c(0,50))+
+    geom_text(aes(label=paste0(round(restricción2019,2),"%")), vjust=0.5, hjust = -0.1,color="black", size=3)
+
+g3
+```
+
+# Mujeres en el Parlamento
+
+## Column {data-width="600"}
+
+### Mujeres en el Parlamento - Mapeo Mundial
+
+```{r}
+mapa4 = ggplot(mapMUN2) +
+  geom_sf(aes(fill = escaños2019), color = "white") +
+  theme_void() +
+  scale_fill_viridis(option = "F",
+                     name= "Índice") +
+  labs(caption="Data: Banco Mundial. Gender Data Portal")
+  
+mapa4
+```
+
+## Column {data-width=400} {.tabset}
+
+### Ranking
+
+```{r}
+escaños = PBIgen[,c(2,6)]
+```
+
+```{r}
+datatable(escaños, filter = "top")
+```
+
+### Histograma
+
+```{r}
+escaños_reg <- summarySE(data=PBIgen, measurevar="escaños2019", groupvar="Region", na.rm=T)
+```
+
+```{r}
+g4 = escaños_reg %>%
+  mutate(Region = fct_reorder(Region, escaños2019)) %>%
+  ggplot( aes(x=Region, y=escaños2019)) +
+    geom_bar(stat="identity", fill="#F6A376", alpha=.6, width=.4) +
+    coord_flip() +
+    labs(title = "Proporción de Mujeres en el Parlamento por Región",
+    subtitle = "Banco Mundial - Gender Data Portal",
+    x =" ",
+    y ="Proporción de escaños ocupados") +
+    geom_hline(yintercept = mean(escaños_reg$escaños2019) ,linetype="dashed", color="#EA4C3B",size=1)+
+    theme_bw() +
+    ylim(c(0,50))+
+    geom_text(aes(label=paste0(round(escaños2019,2),"%")), vjust=0.5, hjust = -0.1,color="black", size=3)
+
+g4
+```
+
+# Modelos estadísticos
+
+## Column {data-width=500} {.tabset}
+
+### OLS 1
+
+```{r}
+modelo1=formula(pc2022~violencia)
+
+reg1=lm(modelo1,data=PBIgen)
+
+model1=list('Índice de violencia'=reg1)
+modelsummary(model1, title = "Regresion: modelo 1",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+### OLS 2
+
+```{r}
+modelo2=formula(pc2022~violencia + escaños2019)
+
+reg2=lm(modelo2,data=PBIgen)
+
+models=list('Índice de violencia'=reg1,
+            'Cantidad de escaños'=reg2)
+modelsummary(models, title = "Resultados de todos los modelos",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+### OLS 3
+
+```{r}
+modelo3=formula(pc2022~violencia + escaños2019 + restricción2019)
+
+reg3=lm(modelo3,data=PBIgen)
+
+models=list('Índice de violencia'=reg1,
+            'Cantidad de escaños'=reg2,
+            'Restricción de libertades'=reg3)
+modelsummary(models, title = "Resultados de todos los modelos",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+### OLS 4
+
+```{r}
+modelo4=formula(pc2022~violencia + escaños2019 + restricción2019 + PT2022)
+
+reg4=lm(modelo4,data=PBIgen)
+
+models=list('Índice de violencia'=reg1,
+            'Cantidad de escaños'=reg2,
+            'Restricción de libertades'=reg3,
+            "Población - Control"=reg4)
+modelsummary(models, title = "Resultados de todos los modelos",
+             stars = TRUE,
+             output = "kableExtra")
+```
+
+## Column {data-width=500} {.tabset}
+
+### Visualización 1
+
+```{r}
+p <- PBIgen %>% 
+  mutate(text=paste("País: ", PBIgen$País, "\nViolencia (%): ", (paste0(PBIgen$violencia,"%")), "\nPBI PC (2022): ", (round(PBIgen$pc2022, 2)), sep = "")) %>%
+  ggplot( aes(x=violencia, y=pc2022, text=text, color = Region)) +
+    geom_point(size=3, shape=23) +
+    ggtitle("Correlación entre la Violencia de Género y el PBI Per Cápita") +
+    theme(
+      plot.title = element_text(size=12, family = "Cormorant Garamond")
+    ) +
+    ylab('PBI Per Cápita ($)') +
+    xlab('Índice de Violencia')+ theme_light() + scale_color_viridis(discrete=TRUE, option="C")
+
+ggplotly(p, tooltip="text") 
+```
+
+### Visualización 2
+
+```{r}
+cor_1 = PBIgen[,c("violencia", "pc2022","escaños2019")]
+```
+
+```{r echo=FALSE}
+corMatrix_1=polycor::hetcor(cor_1)$correlations
+```
+
+
+```{r}
+ggcorrplot(corMatrix_1,hc.order = TRUE, outline.color = "white", 
+           lab = TRUE, lab_size = 5,
+            ggtheme = ggplot2::theme_get(), 
+   colors = c("#6D9EC1", "white", "#E46726"))
+```
+
+### Visualización 3
+
+```{r}
+cor_2 = PBIgen[,c("violencia", "pc2022","escaños2019", "restricción2019")]
+```
+
+```{r}
+corMatrix_2=polycor::hetcor(cor_2)$correlations
+```
+
+```{r}
+ggcorrplot(corMatrix_2, hc.order = TRUE, outline.color = "white",
+           lab = TRUE, lab_size = 5,
+            ggtheme = ggplot2::theme_get(),
+   colors = c("#89C665", "white", "#AC7299"))
+```
+
+### Visualización 4
+
+```{r}
+cor_3 = PBIgen[,c("violencia", "pc2022","escaños2019", "restricción2019", "PT2022")]
+```
+
+```{r echo=FALSE}
+corMatrix_3=polycor::hetcor(cor_3)$correlations
+```
+
+```{r}
+ggcorrplot(corMatrix_3, hc.order = TRUE, outline.color = "white",
+           lab = TRUE, lab_size = 5,
+            ggtheme = ggplot2::theme_gray,
+   colors = c("#68B5D7", "white", "#DD708E"))
+```
+
+# Clusters
+
+```{r}
+dataClus=PBIgen[,c(3,5:7)]
+row.names(dataClus)=PBIgen$País
+```
+
+```{r}
+g.dist = daisy(dataClus, metric="gower")
+```
+
+## Column {data-width="400"} 
+
+### Clusters Generados
+
+```{r}
+set.seed(123)
+res.diana <- hcut(g.dist, k = 3,hc_func='diana')
+dataClus$diana=res.diana$cluster
+```
+
+```{r}
+original = aggregate(.~ diana, data=dataClus,mean)
+head(original)%>%kbl()%>%kable_styling()
+```
+
+### Observaciones
+
+En este caso, se decidió usar el método de clusterización Diana debido a que reporta una mejor aglomeración de los casos. En ese sentido, se observa la clusterización de los países en tres grupos distintos, siendo el primero el que muestra una mejor performance. Esto se da tanto a nivel del PBI Per Cápita (2022), como respecto a las otras tres variables: menores niveles de violencia y restricciones, como mayor número de escaños alcanzados.
+
+Por otro lado, la principal característica del grupo 2 es el hecho de que presenta un mayor nivel de restricciones civiles, a comparación del grupo 3, y menos escaños alcanzados en el parlamento. Mientras que, la principal característica del grupo 3 son los altos niveles de violencia que presenta, a pesar de haber alcanzado un mayor número de escaños. Esto puede ofrecer una idea del efecto que sostienen las variables, siendo que la violencia parece determinante al momento de evaluar la performance de los grupos.  
+
+
+De igual manera, es importan señalar que los países mal agrupados son: Azerbaiyán, República de Corea, Kazajstán y Senegal. Estos aparecen dentro del primer grupo, sin embargo, al observar la data, es claro que resulta paradójico. Por ejemplo, Kazajstán tiene un alto índice de violencia (37.4) y un alto nivel de libertades civiles restringidas (21.8) por lo que debería pertenecer a otro grupo. Los países del primer grupo, en promedio, tienen niveles más bajos en esas variables. Por ejemplo, España tiene 9.6 y 5.8 respectivamente. Además, como se observa en la tabla generada, el primer grupo está caracterizado por un alto PBI per cápita, un bajo índice de violencia de género, así como de libertades civiles de las mujeres, y un relativo porcentaje de escaños ocupados de mujeres en el parlamento. Estas, claramente, son características que estos países mal clusterizados, no comparten. 
+
+Finalmente, tras la observación del mapa, se puede ver una clara diferenciación de las Américas con el resto del mundo, siendo que, al parecer, es la región que sostiene una mejor performance a nivel general. Esto con excepción de El Salvador. 
+
+## Column {data-width="600"} {.tabset} 
+
+### Silueta
+
+```{r}
+fviz_silhouette(res.diana,print.summary = F)
+```
+
+### Mapa de los Países por Grupos
+
+```{r}
+silDIANA=data.frame(res.diana$silinfo$widths)
+silDIANA$País=row.names(silDIANA)
+poorDIANA=silDIANA[silDIANA$sil_width<0,'País']%>%sort()
+```
+
+```{r}
+PBIgen$dianaPCpoor=PBIgen$País%in%poorDIANA
+PBIgen$diana=as.ordered(dataClus$diana)
+```
+
+```{r}
+mapMUN3=merge(mapMUN,PBIgen,by = "ISO", all.x = T) 
+```
+
+```{r}
+mapa5 = ggplot(mapMUN3) +
+  geom_sf(aes(fill = diana), color = "white") +
+  theme_void() +
+  scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) +
+  labs(title ="Países Clusterizados", subtitle='Agrupación en base a las Variables Independientes Propuestas')+
+  theme(plot.title = element_text(size = 20, hjust = 0.54, family = "Cormorant Garamond"))+
+  theme(plot.subtitle = element_text(size = 10, hjust = 0.55, family = "Merriweather"))+
+  
+  theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8))
+  
+mapa5
+```
+
+
+
+
+
+
