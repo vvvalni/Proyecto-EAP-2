@@ -468,9 +468,6 @@ mapa5 = ggplot(mapMUN3) +
   geom_sf(aes(fill = diana), color = "white") +
   theme_void() +
   scale_fill_manual(values=c("#80DEEA","#FFF176","#EA4C3B")) +
-  labs(title ="Países Clusterizados", subtitle='Agrupación en base a las Variables Independientes Propuestas')+
-  theme(plot.title = element_text(size = 20, hjust = 0.54, family = "Cormorant Garamond"))+
-  theme(plot.subtitle = element_text(size = 10, hjust = 0.55, family = "Merriweather"))+
   
   theme(axis.title = element_blank(), axis.text = element_blank(), legend.position = "bottom") + labs(fill=" ") + theme(legend.text = element_text(size = 8))
   
