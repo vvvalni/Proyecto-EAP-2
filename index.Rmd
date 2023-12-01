@@ -436,7 +436,7 @@ Por otro lado, la principal característica del grupo 2 es el hecho de que prese
 
 De igual manera, es importan señalar que los países mal agrupados son: Azerbaiyán, República de Corea, Kazajstán y Senegal. Estos aparecen dentro del primer grupo, sin embargo, al observar la data, es claro que resulta paradójico. Por ejemplo, Kazajstán tiene un alto índice de violencia (37.4) y un alto nivel de libertades civiles restringidas (21.8) por lo que debería pertenecer a otro grupo. Los países del primer grupo, en promedio, tienen niveles más bajos en esas variables. Por ejemplo, España tiene 9.6 y 5.8 respectivamente. Además, como se observa en la tabla generada, el primer grupo está caracterizado por un alto PBI per cápita, un bajo índice de violencia de género, así como de libertades civiles de las mujeres, y un relativo porcentaje de escaños ocupados de mujeres en el parlamento. Estas, claramente, son características que estos países mal clusterizados, no comparten. 
 
-Finalmente, tras la observación del mapa, se puede ver una clara diferenciación de las Américas con el resto del mundo, siendo que, al parecer, es la región que sostiene una mejor performance a nivel general. Esto con excepción de El Salvador. 
+Finalmente, tras la observación del mapa, se puede ver una clara diferenciación de las Américas con el resto del mundo, siendo que, al parecer, es la región que sostiene una mejor performance a nivel general. Esto con excepción de Guatemala. 
 
 ## Column {data-width="600"} {.tabset} 
 
