@@ -294,7 +294,7 @@ reg2=lm(modelo2,data=PBIgen)
 
 models=list('Índice de violencia'=reg1,
             'Cantidad de escaños'=reg2)
-modelsummary(models, title = "Resultados de todos los modelos",
+modelsummary(models, title = "Resultados de Modelo 1 y 2",
              stars = TRUE,
              output = "kableExtra")
 ```
@@ -309,7 +309,7 @@ reg3=lm(modelo3,data=PBIgen)
 models=list('Índice de violencia'=reg1,
             'Cantidad de escaños'=reg2,
             'Restricción de libertades'=reg3)
-modelsummary(models, title = "Resultados de todos los modelos",
+modelsummary(models, title = "Resultados de los modelos 1, 2 y 3",
              stars = TRUE,
              output = "kableExtra")
 ```
