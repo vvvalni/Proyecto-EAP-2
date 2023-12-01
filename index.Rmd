@@ -330,6 +330,16 @@ modelsummary(models, title = "Resultados de todos los modelos",
              output = "kableExtra")
 ```
 
+### Tabla ANOVA
+
+```{r}
+tanova = anova (reg1, reg2, reg3, reg4)
+
+kable(tanova,
+      Caption = "Tabla ANOVA para compara modelos")%>%kableExtra::kable_styling(full_width = FALSE)
+```
+
+
 ## Column {data-width=500} {.tabset}
 
 ### Visualización 1
