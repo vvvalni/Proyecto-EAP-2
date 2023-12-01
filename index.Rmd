@@ -83,7 +83,7 @@ PBIPC = PBIgen[,c(2,3)]
 datatable(PBIPC, filter = "top")
 ```
 
-### Histograma
+### Gráfica por Regiones
 
 ```{r echo=FALSE}
 pbi_reg <- summarySE(data=PBIgen, measurevar="pc2022", groupvar="Region", na.rm=T)
@@ -137,7 +137,7 @@ violencia = PBIgen[,c(2,5)]
 datatable(violencia, filter = "top")
 ```
 
-### Histograma
+### Gráfica por Regiones
 
 ```{r}
 vio_reg <- summarySE(data=PBIgen, measurevar="violencia", groupvar="Region", na.rm=T)
@@ -191,7 +191,7 @@ Restricciones = PBIgen[,c(2,7)]
 datatable(Restricciones, filter = "top")
 ```
 
-### Histograma
+### Gráfica por Regiones
 
 ```{r echo=FALSE}
 lib_reg <- summarySE(data=PBIgen, measurevar="restricción2019", groupvar="Region", na.rm=T)
@@ -244,7 +244,7 @@ escaños = PBIgen[,c(2,6)]
 datatable(escaños, filter = "top")
 ```
 
-### Histograma
+### Gráfica por Regiones
 
 ```{r}
 escaños_reg <- summarySE(data=PBIgen, measurevar="escaños2019", groupvar="Region", na.rm=T)
