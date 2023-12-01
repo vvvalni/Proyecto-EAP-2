@@ -284,7 +284,7 @@ g4 = escaños_reg %>%
 g4
 ```
 
-# Modelos estadísticos
+# Modelos
 
 ## Column {data-width=500} {.tabset}
 
